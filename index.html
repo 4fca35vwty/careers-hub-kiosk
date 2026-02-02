@@ -143,10 +143,10 @@ const flow = {
         title: "Welcome to the Careers Hub",
         question: "How can we help you today?",
         options: [
-            { text: "I want CV or Cover Letter help!", next: "cv_help" },
+            { text: "I want CV or Cover Letter help", next: "cv_help" },
             { text: "I need help finding a part-time job", next: "pt_job" },
             { text: "I need help preparing for an interview", next: "int_help" },
-            { text: "I don't know what to do next!", next: "next_steps" }
+            { text: "I don't know what to do next", next: "next_steps" }
         ]
     },
 
@@ -163,7 +163,7 @@ const flow = {
         options: [
             { text: "No, I haven't used it", next: "res_careerset_direct" },
             { text: "Yes, and I got a score of 70+", next: "res_see_advisor" },
-            { text: "Yes, but I couldn't get 70+ / didn't like it", next: "res_see_advisor" }
+            { text: "Yes, but I couldn't get 70+", next: "res_see_advisor" }
         ]
     },
 
@@ -203,18 +203,18 @@ const flow = {
     int_pathway_status: {
         question: "How far through our interview preparation pathway are you?",
         options: [
-            { text: "1) I have not used the pathway", next: "res_int_pathway" },
-            { text: "2) I've started the pathway, but am stuck or need a demo", next: "res_see_advisor_dropin" },
-            { text: "3) I've completed the pathway", next: "int_first_time_completed" }
+            { text: "I have not used the pathway", next: "res_int_pathway" },
+            { text: "I've started the pathway, but am stuck or need a demo", next: "res_see_advisor_dropin" },
+            { text: "I've completed the pathway", next: "int_first_time_completed" }
         ]
     },
     // Options for those who selected Option 3
     int_first_time_completed: {
         question: "What specific help do you need now?",
         options: [
-            { text: "I think I need practise or one-on-one help with my technique", next: "res_int_practice_appt" },
-            { text: "I need help planning to prepare for a specific interview", next: "res_int_coaching_appt" },
-            { text: "I still have a quick query about interviews/what to expect", next: "res_see_advisor_dropin" }
+            { text: "Practise or one-on-one help with my technique", next: "res_int_practice_appt" },
+            { text: "Help preparing for a specific interview", next: "res_int_coaching_appt" },
+            { text: "A quick query about interviews/what to expect", next: "res_see_advisor_dropin" }
         ]
     },
     int_recent_exp: {
@@ -242,40 +242,40 @@ const flow = {
 
     // --- NEXT STEPS PATHWAY [cite: 34-58] ---
     next_steps: {
-        question: "Are you thinking about life after university or your current time here?",
+        question: "Are you thinking about life after university or your options for during your studies?",
         options: [
-            { text: "I'm not sure what to do after university", next: "next_after_uni" },
-            { text: "I'm not sure what to do now, in university", next: "next_in_uni" }
+            { text: "Graduate options", next: "next_after_uni" },
+            { text: "Options while studying", next: "next_in_uni" }
         ]
     },
     next_after_uni: {
         question: "Do you have any specific paths in mind?",
         options: [
-            { text: "No idea, I need to explore options!", next: "next_explore_check" },
-            { text: "I have some options I want to research in detail", next: "next_research_check" }
+            { text: "No idea, I need to explore my options", next: "next_explore_check" },
+            { text: "Yes, I have some ideas", next: "next_research_check" }
         ]
     },
     next_explore_check: {
-        question: "Have you tried our self-assessment tools?",
+        question: "Here are some tools to try",
         options: [
-            { text: "I haven't used the 4-step Self-assessment page", next: "res_next_4step" },
-            { text: "I've used that, but haven't tried Prospects Career Match", next: "res_prospects_tool" },
+            { text: "The 4-step Self-assessment page", next: "res_next_4step" },
+            { text: "Prospects Career Match", next: "res_prospects_tool" },
             { text: "I've tried both and still want to talk to someone", next: "res_see_advisor_coaching" }
         ]
     },
     next_research_check: {
-        question: "Have you researched these options online yet?",
+        question: "Have you researched these ideas online yet?",
         options: [
             { text: "Yes, but I still need help", next: "res_see_advisor_coaching" },
-            { text: "I want to explore a specific Sector", next: "res_sector_pages" },
-            { text: "I want to research a specific Role", next: "res_role_prospects" }
+            { text: "No, I need help exploring jobs in a specific sector", next: "res_sector_pages" },
+            { text: "No, I need help researching a specific role", next: "res_role_prospects" }
         ]
     },
     next_in_uni: {
         question: "What do you need help with right now?",
         options: [
-            { text: "I need help exploring my options", next: "next_exp_academy" },
-            { text: "I need to gain some experience", next: "next_gain_exp" }
+            { text: "What types of experience can I gain?", next: "next_exp_academy" },
+            { text: "Where can I gain experience while studying?", next: "next_gain_exp" }
         ]
     },
     next_exp_academy: {
@@ -289,7 +289,7 @@ const flow = {
         question: "What kind of experience are you looking for?",
         options: [
             { text: "Something relevant to my career path", next: "res_see_advisor" },
-            { text: "Just any experience / Part-time work", next: "res_pt_websites" },
+            { text: "Just any experience / part-time work", next: "res_pt_websites" },
             { text: "I want to volunteer", next: "res_volunteer" },
             { text: "I'm not sure", next: "res_experience_academy" }
         ]
@@ -371,3 +371,4 @@ render('start');
 
 </body>
 </html>
+
