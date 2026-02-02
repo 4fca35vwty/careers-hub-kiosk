@@ -16,7 +16,13 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--background-colour);
+            /* Updated background with your image */
+            background-image: url('https://dl.dropboxusercontent.com/scl/fi/yqvte7fwf9sbj81m8gv8d/Blank-arrows-slide.jpg?rlkey=6pogs0wms96lmx6x1k601jd4d&st=xhorqj2k&dl=1');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: var(--background-colour); /* Fallback colour */
             color: var(--text-colour);
             display: flex;
             justify-content: center;
@@ -31,10 +37,10 @@
             width: 100%;
             max-width: 900px;
             text-align: center;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.95); /* Slight transparency to see background */
             padding: 50px 40px;
             border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
         h1 {
