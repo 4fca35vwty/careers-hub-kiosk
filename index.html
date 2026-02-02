@@ -84,6 +84,31 @@
             background-color: #004494;
         }
 
+        /* Centred container for the "Something else?" button */
+        .aux-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .something-else-btn {
+            background-color: var(--secondary-colour);
+            color: white;
+            padding: 12px 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+
+        .something-else-btn:active {
+            transform: scale(0.95);
+            background-color: #1e7e34;
+        }
+
         .result-card {
             padding: 40px;
             border-radius: var(--border-radius);
@@ -136,21 +161,22 @@
 
 <script>
 /**
- * DATA STRUCTURE [cite: 1-58]
+ * DATA STRUCTURE
  */
 const flow = {
     start: {
         title: "Welcome to the Careers Hub",
         question: "How can we help you today?",
         options: [
-            { text: "I want CV or Cover Letter help", next: "cv_help" },
-            { text: "I need help finding a part-time job", next: "pt_job" },
-            { text: "I need help preparing for an interview", next: "int_help" },
+            { text: "CV or Cover Letter help", next: "cv_help" },
+            { text: "Help finding a part-time job", next: "pt_job" },
+            { text: "Help preparing for an interview", next: "int_help" },
             { text: "I don't know what to do next", next: "next_steps" }
-        ]
+        ],
+        extra: { text: "Something else?", next: "res_see_future_maker" }
     },
 
-    // --- CV PATHWAY [cite: 1-6] ---
+    // --- CV PATHWAY ---
     cv_help: {
         question: "Do you have a draft ready?",
         options: [
@@ -167,7 +193,7 @@ const flow = {
         ]
     },
 
-    // --- PART-TIME JOB PATHWAY [cite: 7-15] ---
+    // --- PART-TIME JOB PATHWAY ---
     pt_job: {
         question: "What part of the process are you struggling with?",
         options: [
@@ -191,7 +217,7 @@ const flow = {
         ]
     },
 
-    // --- UPDATED INTERVIEW PATHWAY [cite: 16-33] ---
+    // --- INTERVIEW PATHWAY ---
     int_help: {
         question: "Tell us about your interview experience:",
         options: [
@@ -199,7 +225,6 @@ const flow = {
             { text: "I have had many or recent interviews", next: "int_recent_exp" }
         ]
     },
-    // New intermediate question requested by user
     int_pathway_status: {
         question: "How far through our interview preparation pathway are you?",
         options: [
@@ -208,7 +233,6 @@ const flow = {
             { text: "I've completed the pathway", next: "int_first_time_completed" }
         ]
     },
-    // Options for those who selected Option 3
     int_first_time_completed: {
         question: "What specific help do you need now?",
         options: [
@@ -240,7 +264,7 @@ const flow = {
         ]
     },
 
-    // --- NEXT STEPS PATHWAY [cite: 34-58] ---
+    // --- NEXT STEPS PATHWAY ---
     next_steps: {
         question: "Are you thinking about life after university or your options for during your studies?",
         options: [
@@ -274,8 +298,8 @@ const flow = {
     next_in_uni: {
         question: "What do you need help with right now?",
         options: [
-            { text: "What types of experience can I gain?", next: "next_exp_academy" },
-            { text: "Where can I gain experience while studying?", next: "next_gain_exp" }
+            { text: "Understanding the types of experience available to me", next: "next_exp_academy" },
+            { text: "Finding useful websites and resources", next: "next_gain_exp" }
         ]
     },
     next_exp_academy: {
@@ -296,25 +320,26 @@ const flow = {
     },
 
     // --- FINAL RESULT NODES ---
-    res_cv_templates: { result: "Please use our **Online CV & Cover Letter Guides**. These contain templates and examples to help you create your first draft.", action: "QR_CODE" },
-    res_careerset_direct: { result: "Please use **CareerSet** to scan your CV. Aim for a score of **70+** before booking a review.", action: "QR_CODE" },
-    res_see_advisor: { result: "Please **wait to be seen in our drop-in session** or speak to the Future Maker at the front desk to see an advisor.", action: "ADVISOR" },
-    res_see_advisor_apps: { result: "Please **see an advisor** to chat about tailoring your documents and your general application approach.", action: "ADVISOR" },
-    res_see_advisor_dropin: { result: "Please **head to the drop-in session** now to speak with an advisor about your query.", action: "ADVISOR" },
-    res_see_advisor_coaching: { result: "Please **book a Careers Coaching appointment** or speak to an advisor at the drop-in.", action: "ADVISOR" },
-    res_ps_pages: { result: "Please work through our **Personal Statement help pages** on MyCareers first.", action: "QR_CODE" },
-    res_pt_websites: { result: "Check these vacancies: **Unitemps, MyCareers, High Cross, Fosse Park, and Total Catering Solutions**.", action: "QR_CODE" },
-    res_int_pathway: { result: "Please complete the **Interview Pathway** online to build your foundation.", action: "QR_CODE" },
-    res_shortlist_me: { result: "Try **Shortlist.me** to record yourself and practise answering common questions.", action: "QR_CODE" },
-    res_int_practice_appt: { result: "Please **book an Interview Practise appointment** for one-on-one help with technique.", action: "ADVISOR" },
-    res_int_coaching_appt: { result: "Please **book a Careers Coaching appointment** to help plan for your specific interview.", action: "ADVISOR" },
-    res_int_article: { result: "Read our **'Preparing for Interview'** article to learn how to research the role properly.", action: "QR_CODE" },
-    res_next_4step: { result: "Start with our **4-Step 'Exploring My Options' Self-assessment page**.", action: "QR_CODE" },
-    res_prospects_tool: { result: "Try the **Prospects Career Match tool** to find pathways that suit your personality.", action: "QR_CODE" },
-    res_sector_pages: { result: "Explore our **Pathways pages** and the **Prospects Job Profiles by Sector**.", action: "QR_CODE" },
-    res_role_prospects: { result: "Search for your specific **Job Profile on Prospects** for detailed role data.", action: "QR_CODE" },
-    res_experience_academy: { result: "Visit the **Experience Academy pages** to demystify the different types of experience available.", action: "QR_CODE" },
-    res_volunteer: { result: "Visit our **'Make a Difference Day'** pages to find volunteering opportunities.", action: "QR_CODE" }
+    res_see_future_maker: { result: "No problem! Please <b>speak to the Future Maker</b> at the front desk. They will be happy to help you find exactly what you're looking for.", action: "ADVISOR" },
+    res_cv_templates: { result: "Please use our <b>Online CV & Cover Letter Guides</b>. These contain templates and examples to help you create your first draft.", action: "QR_CODE" },
+    res_careerset_direct: { result: "Please use <b>CareerSet</b> to scan your CV. Aim for a score of <b>70+</b> before booking a review.", action: "QR_CODE" },
+    res_see_advisor: { result: "Please <b>wait to be seen in our drop-in session</b> or speak to the Future Maker at the front desk to see an advisor.", action: "ADVISOR" },
+    res_see_advisor_apps: { result: "Please <b>see an advisor</b> to chat about tailoring your documents and your general application approach.", action: "ADVISOR" },
+    res_see_advisor_dropin: { result: "Please <b>head to the drop-in session</b> now to speak with an advisor about your query.", action: "ADVISOR" },
+    res_see_advisor_coaching: { result: "Please <b>book a Careers Coaching appointment</b> or speak to an advisor at the drop-in.", action: "ADVISOR" },
+    res_ps_pages: { result: "Please work through our <b>Personal Statement help pages</b> on MyCareers first.", action: "QR_CODE" },
+    res_pt_websites: { result: "Check these vacancies: <b>Unitemps, MyCareers, High Cross, Fosse Park, and Total Catering Solutions</b>.", action: "QR_CODE" },
+    res_int_pathway: { result: "Please complete the <b>Interview Pathway</b> online to build your foundation.", action: "QR_CODE" },
+    res_shortlist_me: { result: "Try <b>Shortlist.me</b> to record yourself and practise answering common questions.", action: "QR_CODE" },
+    res_int_practice_appt: { result: "Please <b>book an Interview Practice appointment</b> for one-on-one help with technique.", action: "ADVISOR" },
+    res_int_coaching_appt: { result: "Please <b>book a Careers Coaching appointment</b> to help plan for your specific interview.", action: "ADVISOR" },
+    res_int_article: { result: "Read our <b>'Preparing for Interview'</b> article to learn how to research the role properly.", action: "QR_CODE" },
+    res_next_4step: { result: "Start with our <b>4-Step 'Exploring My Options' Self-assessment page</b>.", action: "QR_CODE" },
+    res_prospects_tool: { result: "Try the <b>Prospects Career Match tool</b> to find pathways that suit your personality.", action: "QR_CODE" },
+    res_sector_pages: { result: "Explore our <b>Pathways pages</b> and the <b>Prospects Job Profiles by Sector</b>.", action: "QR_CODE" },
+    res_role_prospects: { result: "Search for your specific <b>Job Profile on Prospects</b> for detailed role data.", action: "QR_CODE" },
+    res_experience_academy: { result: "Visit the <b>Experience Academy pages</b> to demystify the different types of experience available.", action: "QR_CODE" },
+    res_volunteer: { result: "Visit our <b>'Make a Difference Day'</b> pages to find volunteering opportunities.", action: "QR_CODE" }
 };
 
 let history = ['start'];
@@ -332,6 +357,13 @@ function render(nodeKey) {
             html += `<button class="kiosk-button" onclick="goTo('${opt.next}')">${opt.text}</button>`;
         });
         html += `</div>`;
+
+        // Centred "Something else?" button only on start screen
+        if (nodeKey === 'start' && node.extra) {
+            html += `<div class="aux-container">
+                        <button class="something-else-btn" onclick="goTo('${node.extra.next}')">${node.extra.text}</button>
+                     </div>`;
+        }
     } else if (node.result) {
         const isAdvisor = node.action === "ADVISOR";
         html += `
@@ -342,9 +374,13 @@ function render(nodeKey) {
             </div>`;
     }
 
-    html += `<div class="nav-buttons">`;
-    if (nodeKey !== 'start') html += `<button class="nav-btn back-btn" onclick="goBack()">Back</button>`;
-    html += `<button class="nav-btn reset-btn" onclick="reset()">Start Over</button></div>`;
+    // Navigation bar only appears if we are NOT on the start page
+    if (nodeKey !== 'start') {
+        html += `<div class="nav-buttons">
+                    <button class="nav-btn back-btn" onclick="goBack()">Back</button>
+                    <button class="nav-btn reset-btn" onclick="reset()">Start Over</button>
+                 </div>`;
+    }
     
     container.innerHTML = html;
 }
@@ -371,4 +407,3 @@ render('start');
 
 </body>
 </html>
-
