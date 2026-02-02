@@ -136,7 +136,7 @@
 
 <script>
 /**
- * DATA STRUCTURE BASED ON UPLOADED DECISION TREES [cite: 1-58]
+ * DATA STRUCTURE [cite: 1-58]
  */
 const flow = {
     start: {
@@ -150,7 +150,7 @@ const flow = {
         ]
     },
 
-    // --- CV / COVER LETTER PATHWAY [cite: 1-6] ---
+    // --- CV PATHWAY [cite: 1-6] ---
     cv_help: {
         question: "Do you have a draft ready?",
         options: [
@@ -191,22 +191,30 @@ const flow = {
         ]
     },
 
-    // --- INTERVIEW PATHWAY [cite: 16-33] ---
+    // --- UPDATED INTERVIEW PATHWAY [cite: 16-33] ---
     int_help: {
         question: "Tell us about your interview experience:",
         options: [
-            { text: "It's my first interview (or first in a long time)", next: "int_first_time" },
+            { text: "It's my first interview (or first in a long time)", next: "int_pathway_status" },
             { text: "I have had many or recent interviews", next: "int_recent_exp" }
         ]
     },
-    int_first_time: {
-        question: "How far through our preparation resources are you?",
+    // New intermediate question requested by user
+    int_pathway_status: {
+        question: "How far through our interview preparation pathway are you?",
         options: [
-            { text: "I haven't used the Interview Pathway yet", next: "res_int_pathway" },
-            { text: "I've done the pathway and need technique practice", next: "res_int_practice_appt" },
-            { text: "I've done the pathway and need help for a specific interview", next: "res_int_coaching_appt" },
-            { text: "I've done the pathway but have a quick query", next: "res_see_advisor_dropin" },
-            { text: "I've started the pathway/pages but am stuck or need a demo", next: "res_see_advisor_dropin" }
+            { text: "1) I have not used the pathway", next: "res_int_pathway" },
+            { text: "2) I've started the pathway, but am stuck or need a demo", next: "res_see_advisor_dropin" },
+            { text: "3) I've completed the pathway", next: "int_first_time_completed" }
+        ]
+    },
+    // Options for those who selected Option 3
+    int_first_time_completed: {
+        question: "What specific help do you need now?",
+        options: [
+            { text: "I think I need practise or one-on-one help with my technique", next: "res_int_practice_appt" },
+            { text: "I need help planning to prepare for a specific interview", next: "res_int_coaching_appt" },
+            { text: "I still have a quick query about interviews/what to expect", next: "res_see_advisor_dropin" }
         ]
     },
     int_recent_exp: {
@@ -288,7 +296,7 @@ const flow = {
     },
 
     // --- FINAL RESULT NODES ---
-    res_cv_templates: { result: "Please use our **Online CV & Cover Letter Guides**. These contain the templates and examples you need to create your first draft.", action: "QR_CODE" },
+    res_cv_templates: { result: "Please use our **Online CV & Cover Letter Guides**. These contain templates and examples to help you create your first draft.", action: "QR_CODE" },
     res_careerset_direct: { result: "Please use **CareerSet** to scan your CV. Aim for a score of **70+** before booking a review.", action: "QR_CODE" },
     res_see_advisor: { result: "Please **wait to be seen in our drop-in session** or speak to the Future Maker at the front desk to see an advisor.", action: "ADVISOR" },
     res_see_advisor_apps: { result: "Please **see an advisor** to chat about tailoring your documents and your general application approach.", action: "ADVISOR" },
