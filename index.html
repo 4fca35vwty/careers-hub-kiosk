@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Careers Hub Self-Service Kiosk</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* General iPad Kiosk Styling */
         :root {
-            --primary-colour: #0056b3; /* University Blue */
-            --secondary-colour: #28a745; /* Green for Go/Action */
-            --background-colour: #f8f9fa;
-            --text-colour: #343a40;
-            --border-radius: 12px;
+            --primary-colour: #0056b3;
+            --secondary-colour: #28a745;
+            --background-colour: #f4f7f9;
+            --text-colour: #212529;
+            --border-radius: 15px;
         }
 
         body {
@@ -30,335 +29,337 @@
 
         #kiosk-container {
             width: 100%;
-            max-width: 900px; /* Suitable width for an iPad in landscape/portrait */
+            max-width: 900px;
             text-align: center;
             background: #ffffff;
-            padding: 40px;
+            padding: 50px 40px;
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
-        /* Heading Style */
         h1 {
-            font-size: 2.5em;
+            font-size: 2.2em;
             color: var(--primary-colour);
-            margin-bottom: 40px;
+            margin-bottom: 10px;
             font-weight: 700;
         }
 
+        .subtitle {
+            font-size: 1.2em;
+            color: #6c757d;
+            margin-bottom: 40px;
+        }
+
         h2 {
-            font-size: 1.8em;
-            color: var(--text-colour);
+            font-size: 1.6em;
             margin-bottom: 30px;
             font-weight: 600;
         }
 
-        /* Button Styling (Crucial for Kiosk) */
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
 
         .kiosk-button {
-            padding: 30px 20px;
-            font-size: 1.2em;
+            padding: 25px 20px;
+            font-size: 1.1em;
             font-weight: 600;
             color: #ffffff;
             background-color: var(--primary-colour);
             border: none;
             border-radius: var(--border-radius);
             cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-            text-align: center;
-            line-height: 1.3;
-        }
-
-        .kiosk-button:hover {
-            background-color: #004494; /* Darker hover */
-        }
-
-        .kiosk-button:active {
-            transform: scale(0.98); /* Touch feedback */
-        }
-
-        /* Specific button styles for flow */
-        .action-button {
-            background-color: var(--secondary-colour);
-        }
-
-        .action-button:hover {
-            background-color: #1e7e34;
-        }
-
-        .back-button {
-            font-size: 1em;
-            background-color: #6c757d;
-            padding: 15px 20px;
-            width: 100%;
-            max-width: 200px;
-            margin-top: 20px;
-        }
-
-        .back-button:hover {
-            background-color: #5a6268;
-        }
-
-        /* Result Screen Styling */
-        .result-message {
-            padding: 30px;
-            border-radius: var(--border-radius);
-            margin-top: 30px;
-            font-size: 1.5em;
-            font-weight: 600;
-            line-height: 1.5;
-        }
-
-        .result-message.success {
-            background-color: #d4edda;
-            color: var(--secondary-colour);
-            border: 1px solid var(--secondary-colour);
-        }
-
-        .result-message.info {
-            background-color: #cce5ff;
-            color: var(--primary-colour);
-            border: 1px solid var(--primary-colour);
-        }
-
-        /* Placeholder for QR code */
-        .qr-placeholder {
-            width: 200px;
-            height: 200px;
-            background-color: #e9ecef;
-            margin: 20px auto;
-            border-radius: 8px;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9em;
-            color: #6c757d;
-            border: 2px dashed #adb5bd;
+            line-height: 1.4;
         }
+
+        .kiosk-button:active {
+            transform: scale(0.96);
+            background-color: #004494;
+        }
+
+        .result-card {
+            padding: 40px;
+            border-radius: var(--border-radius);
+            background-color: #eef6ff;
+            border: 2px solid var(--primary-colour);
+            margin-top: 20px;
+        }
+
+        .result-card.advisor {
+            background-color: #f0fff4;
+            border-color: var(--secondary-colour);
+        }
+
+        .qr-placeholder {
+            width: 180px;
+            height: 180px;
+            background-color: #ffffff;
+            margin: 25px auto;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .nav-btn {
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .back-btn { background-color: #e9ecef; color: #495057; }
+        .reset-btn { background-color: #343a40; color: #fff; }
     </style>
 </head>
 <body>
-    <div id="kiosk-container">
-        </div>
 
-    <script>
-        const kioskContainer = document.getElementById('kiosk-container');
+<div id="kiosk-container">
+    </div>
 
-        // Define the content for each page/state
-        const pages = {
-            // --- 1. WELCOME/SPLASH PAGE ---
-            welcome: {
-                title: "Welcome to the Careers Hub!",
-                question: "How can we help?",
-                buttons: [
-                    { text: "Help with my CV/Cover Letter", next: "cv_start" },
-                    { text: "Finding work experience/placement", next: "experience_start" },
-                    { text: "Figuring out my next steps/career path", next: "next_steps_start" },
-                    { text: "Resources for starting my own business", next: "business_result" }
-                ],
-                showBack: false
-            },
+<script>
+/**
+ * DATA STRUCTURE BASED ON UPLOADED DECISION TREES [cite: 1-58]
+ */
+const flow = {
+    start: {
+        title: "Welcome to the Careers Hub",
+        question: "How can we help you today?",
+        options: [
+            { text: "I want CV or Cover Letter help!", next: "cv_help" },
+            { text: "I need help finding a part-time job", next: "pt_job" },
+            { text: "I need help preparing for an interview", next: "int_help" },
+            { text: "I don't know what to do next!", next: "next_steps" }
+        ]
+    },
 
-            // --- 2. CV FLOW ---
-            cv_start: {
-                question: "Have you written a CV/Cover Letter before?",
-                buttons: [
-                    { text: "Yes, I need it checked.", next: "cv_review_result" },
-                    { text: "No, I need to start from scratch.", next: "cv_new_result" }
-                ],
-                showBack: true
-            },
+    // --- CV / COVER LETTER PATHWAY [cite: 1-6] ---
+    cv_help: {
+        question: "Do you have a draft ready?",
+        options: [
+            { text: "I have not made a draft yet", next: "res_cv_templates" },
+            { text: "I have made a draft", next: "cv_check_careerset" }
+        ]
+    },
+    cv_check_careerset: {
+        question: "Have you used CareerSet yet?",
+        options: [
+            { text: "No, I haven't used it", next: "res_careerset_direct" },
+            { text: "Yes, and I got a score of 70+", next: "res_see_advisor" },
+            { text: "Yes, but I couldn't get 70+ / didn't like it", next: "res_see_advisor" }
+        ]
+    },
 
-            // --- 3. EXPERIENCE FLOW ---
-            experience_start: {
-                question: "Are you looking for a specific type of experience (e.g., Summer Internships, Graduate Schemes, Part-time job)?",
-                buttons: [
-                    { text: "Yes, I know what I want.", next: "experience_search_result" },
-                    { text: "No, I need general advice and resources.", next: "experience_advice_result" }
-                ],
-                showBack: true
-            },
+    // --- PART-TIME JOB PATHWAY [cite: 7-15] ---
+    pt_job: {
+        question: "What part of the process are you struggling with?",
+        options: [
+            { text: "I don't know where to look", next: "res_pt_websites" },
+            { text: "I know where to look but struggle with applications", next: "pt_apps_type" }
+        ]
+    },
+    pt_apps_type: {
+        question: "What kind of application help do you need?",
+        options: [
+            { text: "General approach and tailoring", next: "res_see_advisor_apps" },
+            { text: "Help with a specific document (CV/Cover Letter)", next: "cv_help" },
+            { text: "Help with a Personal Statement", next: "pt_ps_check" }
+        ]
+    },
+    pt_ps_check: {
+        question: "Have you used our online Personal Statement help pages?",
+        options: [
+            { text: "No, not yet", next: "res_ps_pages" },
+            { text: "Yes, but I still need help", next: "res_see_advisor" }
+        ]
+    },
 
-            // --- 4. NEXT STEPS FLOW ---
-            next_steps_start: {
-                question: "Do you have an idea of the sector you want to work in, or are you completely unsure?",
-                buttons: [
-                    { text: "I have a few ideas/sectors in mind.", next: "next_steps_focused_result" },
-                    { text: "I am completely unsure and need broad guidance.", next: "next_steps_broad_result" }
-                ],
-                showBack: true
-            },
+    // --- INTERVIEW PATHWAY [cite: 16-33] ---
+    int_help: {
+        question: "Tell us about your interview experience:",
+        options: [
+            { text: "It's my first interview (or first in a long time)", next: "int_first_time" },
+            { text: "I have had many or recent interviews", next: "int_recent_exp" }
+        ]
+    },
+    int_first_time: {
+        question: "How far through our preparation resources are you?",
+        options: [
+            { text: "I haven't used the Interview Pathway yet", next: "res_int_pathway" },
+            { text: "I've done the pathway and need technique practice", next: "res_int_practice_appt" },
+            { text: "I've done the pathway and need help for a specific interview", next: "res_int_coaching_appt" },
+            { text: "I've done the pathway but have a quick query", next: "res_see_advisor_dropin" },
+            { text: "I've started the pathway/pages but am stuck or need a demo", next: "res_see_advisor_dropin" }
+        ]
+    },
+    int_recent_exp: {
+        question: "What is your main goal today?",
+        options: [
+            { text: "I want to practise my technique", next: "int_practice_check" },
+            { text: "I'm not sure how to prepare in general", next: "res_int_pathway" },
+            { text: "I need to strategise for a specific interview", next: "int_strat_check" }
+        ]
+    },
+    int_practice_check: {
+        question: "Have you used Shortlist.me yet?",
+        options: [
+            { text: "No", next: "res_shortlist_me" },
+            { text: "Yes", next: "res_int_practice_appt" }
+        ]
+    },
+    int_strat_check: {
+        question: "Have you looked at our 'Preparing for Interview' article?",
+        options: [
+            { text: "No", next: "res_int_article" },
+            { text: "Yes, and I still need help", next: "res_int_coaching_appt" }
+        ]
+    },
 
-            // --- 5. RESULTS/ACTIONS ---
+    // --- NEXT STEPS PATHWAY [cite: 34-58] ---
+    next_steps: {
+        question: "Are you thinking about life after university or your current time here?",
+        options: [
+            { text: "I'm not sure what to do after university", next: "next_after_uni" },
+            { text: "I'm not sure what to do now, in university", next: "next_in_uni" }
+        ]
+    },
+    next_after_uni: {
+        question: "Do you have any specific paths in mind?",
+        options: [
+            { text: "No idea, I need to explore options!", next: "next_explore_check" },
+            { text: "I have some options I want to research in detail", next: "next_research_check" }
+        ]
+    },
+    next_explore_check: {
+        question: "Have you tried our self-assessment tools?",
+        options: [
+            { text: "I haven't used the 4-step Self-assessment page", next: "res_next_4step" },
+            { text: "I've used that, but haven't tried Prospects Career Match", next: "res_prospects_tool" },
+            { text: "I've tried both and still want to talk to someone", next: "res_see_advisor_coaching" }
+        ]
+    },
+    next_research_check: {
+        question: "Have you researched these options online yet?",
+        options: [
+            { text: "Yes, but I still need help", next: "res_see_advisor_coaching" },
+            { text: "I want to explore a specific Sector", next: "res_sector_pages" },
+            { text: "I want to research a specific Role", next: "res_role_prospects" }
+        ]
+    },
+    next_in_uni: {
+        question: "What do you need help with right now?",
+        options: [
+            { text: "I need help exploring my options", next: "next_exp_academy" },
+            { text: "I need to gain some experience", next: "next_gain_exp" }
+        ]
+    },
+    next_exp_academy: {
+        question: "Have you looked at our Experience Academy pages?",
+        options: [
+            { text: "No", next: "res_experience_academy" },
+            { text: "Yes", next: "res_see_advisor" }
+        ]
+    },
+    next_gain_exp: {
+        question: "What kind of experience are you looking for?",
+        options: [
+            { text: "Something relevant to my career path", next: "res_see_advisor" },
+            { text: "Just any experience / Part-time work", next: "res_pt_websites" },
+            { text: "I want to volunteer", next: "res_volunteer" },
+            { text: "I'm not sure", next: "res_experience_academy" }
+        ]
+    },
 
-            // CV RESULTS
-            cv_new_result: {
-                result: {
-                    heading: "✅ Next Step: Start Your CV",
-                    message: "It’s great you’re getting started! We recommend you use our **Online CV Guide** first to create a draft. Please scan the QR code below for the resource.",
-                    action: "QR_CODE_RESOURCE",
-                    contact: "If you have specific questions about the guide, please speak to the Future Maker at the front desk."
-                },
-                showBack: true
-            },
-            cv_review_result: {
-                result: {
-                    heading: "👥 Next Step: Drop-in Review",
-                    message: "Our expert team can review your current CV. Please **wait to be seen in the drop-in queue**. A member of the team will call your name shortly.",
-                    action: "DROP_IN",
-                    contact: "If you need a quick chat before the review, speak to the Future Maker at the front desk."
-                },
-                showBack: true
-            },
+    // --- FINAL RESULT NODES ---
+    res_cv_templates: { result: "Please use our **Online CV & Cover Letter Guides**. These contain the templates and examples you need to create your first draft.", action: "QR_CODE" },
+    res_careerset_direct: { result: "Please use **CareerSet** to scan your CV. Aim for a score of **70+** before booking a review.", action: "QR_CODE" },
+    res_see_advisor: { result: "Please **wait to be seen in our drop-in session** or speak to the Future Maker at the front desk to see an advisor.", action: "ADVISOR" },
+    res_see_advisor_apps: { result: "Please **see an advisor** to chat about tailoring your documents and your general application approach.", action: "ADVISOR" },
+    res_see_advisor_dropin: { result: "Please **head to the drop-in session** now to speak with an advisor about your query.", action: "ADVISOR" },
+    res_see_advisor_coaching: { result: "Please **book a Careers Coaching appointment** or speak to an advisor at the drop-in.", action: "ADVISOR" },
+    res_ps_pages: { result: "Please work through our **Personal Statement help pages** on MyCareers first.", action: "QR_CODE" },
+    res_pt_websites: { result: "Check these vacancies: **Unitemps, MyCareers, High Cross, Fosse Park, and Total Catering Solutions**.", action: "QR_CODE" },
+    res_int_pathway: { result: "Please complete the **Interview Pathway** online to build your foundation.", action: "QR_CODE" },
+    res_shortlist_me: { result: "Try **Shortlist.me** to record yourself and practise answering common questions.", action: "QR_CODE" },
+    res_int_practice_appt: { result: "Please **book an Interview Practise appointment** for one-on-one help with technique.", action: "ADVISOR" },
+    res_int_coaching_appt: { result: "Please **book a Careers Coaching appointment** to help plan for your specific interview.", action: "ADVISOR" },
+    res_int_article: { result: "Read our **'Preparing for Interview'** article to learn how to research the role properly.", action: "QR_CODE" },
+    res_next_4step: { result: "Start with our **4-Step 'Exploring My Options' Self-assessment page**.", action: "QR_CODE" },
+    res_prospects_tool: { result: "Try the **Prospects Career Match tool** to find pathways that suit your personality.", action: "QR_CODE" },
+    res_sector_pages: { result: "Explore our **Pathways pages** and the **Prospects Job Profiles by Sector**.", action: "QR_CODE" },
+    res_role_prospects: { result: "Search for your specific **Job Profile on Prospects** for detailed role data.", action: "QR_CODE" },
+    res_experience_academy: { result: "Visit the **Experience Academy pages** to demystify the different types of experience available.", action: "QR_CODE" },
+    res_volunteer: { result: "Visit our **'Make a Difference Day'** pages to find volunteering opportunities.", action: "QR_CODE" }
+};
 
-            // EXPERIENCE RESULTS
-            experience_search_result: {
-                result: {
-                    heading: "✅ Next Step: Targeted Job Search",
-                    message: "Focus your search! We have a dedicated portal listing opportunities tailored for our students. Please scan the QR code to access the **Job Search Portal**.",
-                    action: "QR_CODE_RESOURCE",
-                    contact: "If you cannot find relevant opportunities in the portal, speak to the Future Maker at the front desk."
-                },
-                showBack: true
-            },
-            experience_advice_result: {
-                result: {
-                    heading: "👥 Next Step: Speak to an Advisor",
-                    message: "Finding experience can be tricky, but we can help! Please **wait to be seen in the drop-in queue** for an initial chat with an advisor.",
-                    action: "DROP_IN",
-                    contact: "Alternatively, you can book a one-to-one appointment online for a more in-depth discussion."
-                },
-                showBack: true
-            },
+let history = ['start'];
 
-            // NEXT STEPS RESULTS
-            next_steps_focused_result: {
-                result: {
-                    heading: "✅ Next Step: Explore Sector Resources",
-                    message: "Knowing your interests is a great start! Use our **Sector Guides** for in-depth information on career paths. Scan the QR code to view the guides.",
-                    action: "QR_CODE_RESOURCE",
-                    contact: "Ready to apply? Speak to the Future Maker at the front desk for application support."
-                },
-                showBack: true
-            },
-            next_steps_broad_result: {
-                result: {
-                    heading: "👥 Next Step: Speak to a Future Maker",
-                    message: "Don't worry, many students feel this way! Please **speak to the Future Maker at the front desk** now for a quick chat to help narrow down your options.",
-                    action: "FRONT_DESK_CHAT",
-                    contact: "This initial chat will determine the best next steps for you."
-                },
-                showBack: true
-            },
-
-            // BUSINESS RESULT (Direct Action)
-            business_result: {
-                result: {
-                    heading: "✅ Next Step: Business Start-up Resources",
-                    message: "Interested in entrepreneurship? We have a dedicated 'Start-Up' team and resources. Please scan the QR code to access the **Entrepreneurship Toolkit**.",
-                    action: "QR_CODE_RESOURCE",
-                    contact: "For one-to-one mentoring, please speak to the Future Maker at the front desk."
-                },
-                showBack: true
-            }
-        };
-
-        let history = ['welcome']; // Simple history stack for the back button
-
-        /**
-         * Renders a specific page state into the container.
-         * @param {string} pageKey - The key of the page in the 'pages' object.
-         */
-        function renderPage(pageKey) {
-            const pageData = pages[pageKey];
-            let htmlContent = '';
-
-            // Check if it's a regular question/button page
-            if (pageData.question) {
-                htmlContent += `<h2>${pageData.question}</h2>`;
-                htmlContent += `<div class="button-grid">`;
-                pageData.buttons.forEach(button => {
-                    htmlContent += `<button class="kiosk-button" onclick="navigate('${button.next}')">${button.text}</button>`;
-                });
-                htmlContent += `</div>`;
-            } 
-            // Check if it's a result page
-            else if (pageData.result) {
-                const result = pageData.result;
-                const resultClass = (result.action === "DROP_IN" || result.action === "FRONT_DESK_CHAT") ? "info" : "success";
-
-                htmlContent += `<div class="result-message ${resultClass}">`;
-                htmlContent += `<h2>${result.heading}</h2>`;
-                htmlContent += `<p>${result.message}</p>`;
-
-                // Add QR code placeholder if required
-                if (result.action === "QR_CODE_RESOURCE") {
-                    htmlContent += `<div class="qr-placeholder">
-                                        [Placeholder: Replace this div with your QR Code image/tag]
-                                    </div>`;
-                }
-                
-                // Final instruction/contact
-                htmlContent += `<p style="margin-top: 25px; font-size: 1em; font-weight: 400;">**Need more help?** ${result.contact}</p>`;
-                htmlContent += `</div>`;
-            }
-
-            // Add back button if required
-            if (pageData.showBack) {
-                htmlContent += `<button class="kiosk-button back-button" onclick="goBack()">Start Over / Back</button>`;
-            }
-            
-            // Always show the main heading
-            kioskContainer.innerHTML = `<h1>${pages.welcome.title}</h1>` + htmlContent;
-        }
-
-        /**
-         * Handles navigation to a new page state.
-         * @param {string} nextKey - The key of the next page to navigate to.
-         */
-        function navigate(nextKey) {
-            // Store the current page key before moving, only if it's a non-result page
-            if (history[history.length - 1] !== nextKey && !pages[nextKey].result && pages[history[history.length - 1]] && !pages[history[history.length - 1]].result) {
-                history.push(nextKey);
-            } else if (pages[nextKey].result) {
-                // If navigating to a result, clear the history for simplicity and leave only the current key (the result)
-                // This ensures 'Start Over / Back' from a result goes back to the welcome screen
-                history = [nextKey]; 
-            }
-            
-            renderPage(nextKey);
-        }
-
-        /**
-         * Handles the back button functionality.
-         */
-        function goBack() {
-            // If on a result page, go straight back to the welcome screen
-            if (history.length > 0 && pages[history[history.length - 1]].result) {
-                history = ['welcome'];
-                renderPage('welcome');
-            }
-            // Standard back logic: remove current page and render the previous
-            else if (history.length > 1) {
-                history.pop();
-                renderPage(history[history.length - 1]);
-            } else {
-                // If only 'welcome' is left, ensure we are rendering 'welcome'
-                history = ['welcome'];
-                renderPage('welcome');
-            }
-        }
-
-        // Initial page load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderPage('welcome');
+function render(nodeKey) {
+    const node = flow[nodeKey];
+    const container = document.getElementById('kiosk-container');
+    
+    let html = `<h1>${flow.start.title}</h1>`;
+    
+    if (node.question) {
+        html += `<p class="subtitle">${node.question}</p>`;
+        html += `<div class="button-grid">`;
+        node.options.forEach(opt => {
+            html += `<button class="kiosk-button" onclick="goTo('${opt.next}')">${opt.text}</button>`;
         });
-    </script>
+        html += `</div>`;
+    } else if (node.result) {
+        const isAdvisor = node.action === "ADVISOR";
+        html += `
+            <div class="result-card ${isAdvisor ? 'advisor' : ''}">
+                <h2>${isAdvisor ? '👥 Speak to us' : '✅ Your Next Step'}</h2>
+                <p style="font-size:1.2em;">${node.result}</p>
+                ${node.action === "QR_CODE" ? '<div class="qr-placeholder">Scan QR Resource Here</div>' : ''}
+            </div>`;
+    }
+
+    html += `<div class="nav-buttons">`;
+    if (nodeKey !== 'start') html += `<button class="nav-btn back-btn" onclick="goBack()">Back</button>`;
+    html += `<button class="nav-btn reset-btn" onclick="reset()">Start Over</button></div>`;
+    
+    container.innerHTML = html;
+}
+
+function goTo(key) {
+    history.push(key);
+    render(key);
+}
+
+function goBack() {
+    if (history.length > 1) {
+        history.pop();
+        render(history[history.length - 1]);
+    }
+}
+
+function reset() {
+    history = ['start'];
+    render('start');
+}
+
+render('start');
+</script>
+
 </body>
 </html>
