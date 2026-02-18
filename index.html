@@ -16,13 +16,12 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            /* Updated background with your image */
             background-image: url('https://dl.dropboxusercontent.com/scl/fi/yqvte7fwf9sbj81m8gv8d/Blank-arrows-slide.jpg?rlkey=6pogs0wms96lmx6x1k601jd4d&st=xhorqj2k&dl=1');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-color: var(--background-colour); /* Fallback colour */
+            background-color: var(--background-colour);
             color: var(--text-colour);
             display: flex;
             justify-content: center;
@@ -37,7 +36,7 @@
             width: 100%;
             max-width: 900px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.95); /* Slight transparency to see background */
+            background: rgba(255, 255, 255, 0.95);
             padding: 50px 40px;
             border-radius: var(--border-radius);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -90,7 +89,6 @@
             background-color: #004494;
         }
 
-        /* Centred container for the "Something else?" button */
         .aux-container {
             display: flex;
             justify-content: center;
@@ -141,6 +139,15 @@
             color: #888;
         }
 
+        .qr-image {
+            width: 180px;
+            height: 180px;
+            margin: 25px auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
         .nav-buttons {
             display: flex;
             gap: 15px;
@@ -162,13 +169,9 @@
 </head>
 <body>
 
-<div id="kiosk-container">
-    </div>
+<div id="kiosk-container"></div>
 
 <script>
-/**
- * DATA STRUCTURE
- */
 const flow = {
     start: {
         title: "Welcome to the Careers Hub",
@@ -364,7 +367,6 @@ function render(nodeKey) {
         });
         html += `</div>`;
 
-        // Centred "Something else?" button only on start screen
         if (nodeKey === 'start' && node.extra) {
             html += `<div class="aux-container">
                         <button class="something-else-btn" onclick="goTo('${node.extra.next}')">${node.extra.text}</button>
@@ -372,15 +374,36 @@ function render(nodeKey) {
         }
     } else if (node.result) {
         const isAdvisor = node.action === "ADVISOR";
+
+        // QR Code Mapping - Update these paths with your actual image URLs
+        const qrCodes = {
+            'res_cv_templates': 'images/qr-cv.png',
+            'res_careerset_direct': 'images/qr-careerset.png',
+            'res_pt_websites': 'images/qr-jobs.png',
+            'res_ps_pages': 'images/qr-ps.png',
+            'res_int_pathway': 'images/qr-interview-pathway.png',
+            'res_shortlist_me': 'images/qr-shortlist.png',
+            'res_int_article': 'images/qr-interview-article.png',
+            'res_next_4step': 'images/qr-options.png',
+            'res_prospects_tool': 'images/qr-prospects.png',
+            'res_sector_pages': 'images/qr-sectors.png',
+            'res_role_prospects': 'images/qr-roles.png',
+            'res_experience_academy': 'images/qr-academy.png',
+            'res_volunteer': 'images/qr-volunteer.png'
+        };
+
+        const qrImageHtml = qrCodes[nodeKey] 
+            ? `<img src="${qrCodes[nodeKey]}" class="qr-image" alt="QR Code" onerror="this.outerHTML='<div class=\'qr-placeholder\'>QR Code Image Not Found</div>'">`
+            : '<div class="qr-placeholder">Scan QR Resource Here</div>';
+
         html += `
             <div class="result-card ${isAdvisor ? 'advisor' : ''}">
                 <h2>${isAdvisor ? '👥 Speak to us' : '✅ Your Next Step'}</h2>
                 <p style="font-size:1.2em;">${node.result}</p>
-                ${node.action === "QR_CODE" ? '<div class="qr-placeholder">Scan QR Resource Here</div>' : ''}
+                ${node.action === "QR_CODE" ? qrImageHtml : ''}
             </div>`;
     }
 
-    // Navigation bar only appears if we are NOT on the start page
     if (nodeKey !== 'start') {
         html += `<div class="nav-buttons">
                     <button class="nav-btn back-btn" onclick="goBack()">Back</button>
